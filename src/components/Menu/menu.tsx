@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import cn from 'classnames'
 
-type MenuMode = 'horizontal' | 'vertical'
+export type MenuMode = 'horizontal' | 'vertical'
 
 export interface MenuProps {
     defaultIndex?: number
@@ -40,8 +40,9 @@ const Menu: React.FC<MenuProps> = ({
         [onSelect],
     )
 
+    // data-testid="test-menu" 用于测试
     return (
-        <ul className={classes} style={style}>
+        <ul className={classes} style={style} data-testid="test-menu">
             <MenuContext.Provider
                 value={{ activeIndex, onClick: handleSelect }}
             >
