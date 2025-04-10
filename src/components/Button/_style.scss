@@ -1,0 +1,124 @@
+@use 'sass:color';
+
+@mixin button-size($padding-x, $padding-y, $font-size, $boarder-radius) {
+    padding: $padding-x $padding-y;
+    font-size: $font-size;
+    border-radius: $boarder-radius;
+}
+
+@mixin button-style(
+    $background,
+    $border,
+    $color,
+    $hover-background: color.adjust($background, $lightness: 15%),
+    $hover-border: color.adjust($border, $lightness: 15%),
+    $hover-color: $color
+) {
+    background: $background;
+    border: $border;
+    color: $color;
+    &:hover,
+    &:focus {
+        color: $hover-color;
+        background: $hover-background;
+        border: $hover-border;
+    }
+    @include when(focus) {
+        color: $hover-color;
+        background: $hover-background;
+        border: $hover-border;
+    }
+}
+
+@include b(button) {
+    position: relative;
+    display: inline-block;
+    font-weight: $btn-font-size;
+    line-height: $btn-line-height;
+    color: $body-color;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    border: $btn-border-width solid transparent;
+    @include button-size(
+        $btn-padding-x,
+        $btn-padding-y,
+        $btn-font-size,
+        $btn-border-radius
+    );
+    box-shadow: $btn-box-shadow;
+    cursor: pointer;
+    transition: $btn-transition;
+
+    @include m(primary) {
+        @include button-style($primary, $primary, $white);
+    }
+
+    @include m(danger) {
+        @include button-style($danger, $danger, $white);
+    }
+
+    @include m(default) {
+        @include button-style(
+            $white,
+            $gray-400,
+            $body-color,
+            $white,
+            $primary,
+            $primary
+        );
+    }
+
+    @include m(link) {
+        font-weight: $font-weight-normal;
+        color: $btn-link-color;
+        text-decoration: $link-decoration;
+        box-shadow: none;
+        &:hover {
+            color: $btn-link-hover-color;
+            text-decoration: $link-hover-decoration;
+        }
+        &:focus,
+        &.focus {
+            text-decoration: $link-hover-decoration;
+            box-shadow: none;
+        }
+        &:disabled {
+            color: $btn-link-disabled-color;
+            pointer-events: none;
+        }
+        @include when(disabled) {
+            color: $btn-link-disabled-color;
+            pointer-events: none;
+        }
+    }
+
+    @include when(disabled) {
+        background-color: #ccc;
+        cursor: not-allowed;
+        opacity: $btn-disabled-opacity;
+        box-shadow: none;
+        > * {
+            pointer-events: none;
+        }
+    }
+
+    @include m(lg) {
+        @include button-size(
+            $btn-padding-x-lg,
+            $btn-padding-y-lg,
+            $btn-font-size-lg,
+            $btn-border-radius-lg
+        );
+    }
+
+    @include m(sm) {
+        @include button-size(
+            $btn-padding-x-sm,
+            $btn-padding-y-sm,
+            $btn-font-size-sm,
+            $btn-border-radius-sm
+        );
+    }
+}

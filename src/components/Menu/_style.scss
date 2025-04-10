@@ -1,0 +1,59 @@
+@include b(menu) {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 30px;
+    list-style: none;
+
+    @include m(horizontal) {
+        flex-direction: row;
+
+        @include b(menu-item) {
+            border-bottom: $menu-border-width solid $menu-border-color;
+            @include when(active) {
+                color: $menu-item-active-color;
+                border-bottom: $menu-border-width solid $menu-item-active-color;
+            }
+
+            &:hover {
+                color: $menu-item-active-color;
+                border-bottom: $menu-border-width solid $menu-item-active-color;
+            }
+        }
+    }
+
+    @include m(vertical) {
+        flex-direction: column;
+        display: inline-block;
+
+        @include b(menu-item) {
+            border-left: $menu-border-width solid $menu-border-color;
+            margin-left: 5px;
+            @include when(active) {
+                border-left: $menu-border-width solid $menu-item-active-color;
+            }
+            &:hover {
+                border-left: $menu-border-width solid $menu-item-active-color;
+            }
+        }
+    }
+}
+
+@include b(menu-item) {
+    padding: $menu-item-padding-x $menu-item-padding-y;
+    cursor: pointer;
+    transition: $menu-transition;
+
+    @include when(disabled) {
+        color: $menu-item-disabled-color;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+    @include when(active) {
+        color: $menu-item-active-color;
+    }
+    &:hover {
+        color: $menu-item-active-color;
+    }
+}

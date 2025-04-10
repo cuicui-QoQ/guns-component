@@ -1,0 +1,48 @@
+@include b(alert) {
+    border-radius: 0.5rem;
+    position: relative;
+    margin: $alert-margin;
+    font-size: $alert-font-size;
+    line-height: $alert-line-height;
+    padding: $alert-padding-x $alert-padding-y;
+    display: flex;
+    flex-direction: row;
+
+    @include e(text) {
+        flex: 1;
+    }
+
+    @include e(description) {
+        margin-top: $alert-padding-y;
+        font-size: $alert-description-font-size;
+    }
+
+    @include e(icon) {
+        margin-right: $alert-margin-sm;
+    }
+
+    @include e(closeIcon) {
+        padding-left: $alert-padding-sm;
+        cursor: pointer;
+    }
+
+    @include m(success) {
+        background-color: $success-1;
+        border: $border-width solid $success-2;
+    }
+
+    @include m(info) {
+        background-color: $info-1;
+        border: $border-width solid $info-2;
+    }
+
+    @include m(warning) {
+        background-color: $warning-1;
+        border: $border-width solid $warning-2;
+    }
+
+    @include m(error) {
+        background-color: $danger-1;
+        border: $border-width solid $danger-2;
+    }
+}

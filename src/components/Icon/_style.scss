@@ -1,0 +1,9 @@
+$types: primary, secondary, success, info, warning, danger, light, dark;
+
+@include b(icon) {
+    @each $key, $val in $theme-colors {
+        @include m(#{$key}) {
+            color: $val;
+        }
+    }
+}

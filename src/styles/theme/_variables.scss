@@ -1,0 +1,436 @@
+@use 'sass:color';
+/**
+    系统色板：基础色板 + 中性色板
+    产品色板：品牌色 + 功能色板
+*/
+
+/***********
+*
+* 色彩系统
+*
+************/
+
+// 中性色板
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+// 基础色板
+$blue: #0d6efd !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #fadb14 !default;
+$green: #52c41a !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+
+// Dust Red / 薄暮
+$red-1: #fff1f0 !default;
+$red-2: #ffccc7 !default;
+$red-3: #ffa39e !default;
+$red-4: #ff7875 !default;
+$red-5: #ff4d4f !default;
+$red-6: #f5222d !default;
+$red-7: #cf1322 !default;
+$red-8: #a8071a !default;
+$red-9: #820014 !default;
+$red-10: #5c0011 !default;
+
+// Volcano / 火山
+$volcano-1: #fff2e8 !default;
+$volcano-2: #ffd8bf !default;
+$volcano-3: #ffbb96 !default;
+$volcano-4: #ff9c6e !default;
+$volcano-5: #ff7a45 !default;
+$volcano-6: #fa541c !default;
+$volcano-7: #d4380d !default;
+$volcano-8: #ad2102 !default;
+$volcano-9: #871400 !default;
+$volcano-10: #610b00 !default;
+
+// Sunset Orange / 日暮
+$orange-1: #fff7e6 !default;
+$orange-2: #ffe7ba !default;
+$orange-3: #ffd591 !default;
+$orange-4: #ffc069 !default;
+$orange-5: #ffa940 !default;
+$orange-6: #fa8c16 !default;
+$orange-7: #d46b08 !default;
+$orange-8: #ad4e00 !default;
+$orange-9: #873800 !default;
+$orange-10: #612500 !default;
+
+// Calendula Gold / 金盏花
+$gold-1: #fffbe6 !default;
+$gold-2: #fff1b8 !default;
+$gold-3: #ffe58f !default;
+$gold-4: #ffd666 !default;
+$gold-5: #ffc53d !default;
+$gold-6: #faad14 !default;
+$gold-7: #d48806 !default;
+$gold-8: #ad6800 !default;
+$gold-9: #874d00 !default;
+$gold-10: #613400 !default;
+
+// Sunrise Yellow / 日出
+$yellow-1: #feffe6 !default;
+$yellow-2: #ffffb8 !default;
+$yellow-3: #fffb8f !default;
+$yellow-4: #fff566 !default;
+$yellow-5: #ffec3d !default;
+$yellow-6: #fadb14 !default;
+$yellow-7: #d4b106 !default;
+$yellow-8: #ad8b00 !default;
+$yellow-9: #876800 !default;
+$yellow-10: #614700 !default;
+
+// Lime / 青柠
+$lime-1: #fcffe6 !default;
+$lime-2: #f4ffb8 !default;
+$lime-3: #eaff8f !default;
+$lime-4: #d3f261 !default;
+$lime-5: #bae637 !default;
+$lime-6: #a0d911 !default;
+$lime-7: #7cb305 !default;
+$lime-8: #5b8c00 !default;
+$lime-9: #3f6600 !default;
+$lime-10: #254000 !default;
+
+// Polar Green / 极光绿
+$green-1: #f6ffed !default;
+$green-2: #d9f7be !default;
+$green-3: #b7eb8f !default;
+$green-4: #95de64 !default;
+$green-5: #73d13d !default;
+$green-6: #52c41a !default;
+$green-7: #389e0d !default;
+$green-8: #237804 !default;
+$green-9: #135200 !default;
+$green-10: #092b00 !default;
+
+// Cyan / 明青
+$cyan-1: #e6fffb !default;
+$cyan-2: #b5f5ec !default;
+$cyan-3: #87e8de !default;
+$cyan-4: #5cdbd3 !default;
+$cyan-5: #36cfc9 !default;
+$cyan-6: #13c2c2 !default;
+$cyan-7: #08979c !default;
+$cyan-8: #006d75 !default;
+$cyan-9: #00474f !default;
+$cyan-10: #002329 !default;
+
+// Daybreak Blue / 拂晓蓝
+$blue-1: #e6f4ff !default;
+$blue-2: #bae0ff !default;
+$blue-3: #91caff !default;
+$blue-4: #69b1ff !default;
+$blue-5: #4096ff !default;
+$blue-6: #1677ff !default;
+$blue-7: #0958d9 !default;
+$blue-8: #003eb3 !default;
+$blue-9: #002c8c !default;
+$blue-10: #001d66 !default;
+
+// Geek Blue / 极客蓝
+$geekblue-1: #f0f5ff !default;
+$geekblue-2: #d6e4ff !default;
+$geekblue-3: #adc6ff !default;
+$geekblue-4: #85a5ff !default;
+$geekblue-5: #597ef7 !default;
+$geekblue-6: #2f54eb !default;
+$geekblue-7: #1d39c4 !default;
+$geekblue-8: #10239e !default;
+$geekblue-9: #061178 !default;
+$geekblue-10: #030852 !default;
+
+// Golden Purple / 酱紫
+$purple-1: #f9f0ff !default;
+$purple-2: #efdbff !default;
+$purple-3: #d3adf7 !default;
+$purple-4: #b37feb !default;
+$purple-5: #9254de !default;
+$purple-6: #722ed1 !default;
+$purple-7: #531dab !default;
+$purple-8: #391085 !default;
+$purple-9: #22075e !default;
+$purple-10: #120338 !default;
+
+// Magenta / 法式洋红
+$magenta-1: #fff0f6 !default;
+$magenta-2: #ffd6e7 !default;
+$magenta-3: #ffadd2 !default;
+$magenta-4: #ff85c0 !default;
+$magenta-5: #f759ab !default;
+$magenta-6: #eb2f96 !default;
+$magenta-7: #c41d7f !default;
+$magenta-8: #9e1068 !default;
+$magenta-9: #780650 !default;
+$magenta-10: #520339 !default;
+
+// 功能色板
+$primary: $blue !default;
+$secondary: $gray-600 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-800 !default;
+
+$primary-1: $blue-1 !default;
+$success-1: $green-1 !default;
+$info-1: $cyan-1 !default;
+$warning-1: $gold-1 !default;
+$danger-1: $red-1 !default;
+$primary-2: $blue-2 !default;
+$success-2: $green-2 !default;
+$info-2: $cyan-2 !default;
+$warning-2: $gold-2 !default;
+$danger-2: $red-2 !default;
+$primary-3: $blue-3 !default;
+$success-3: $green-3 !default;
+$info-3: $cyan-3 !default;
+$warning-3: $gold-3 !default;
+$danger-3: $red-3 !default;
+
+$theme-colors: (
+    'primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'info': $info,
+    'warning': $warning,
+    'danger': $danger,
+    'light': $light,
+    'dark': $dark,
+);
+
+/***********
+*
+* 字体系统
+*
+************/
+
+// 字体类型
+$font-family-sans-serif:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji' !default;
+$font-family-monospace:
+    SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+// 字体大小
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg: $font-size-base * 1.25 !default;
+$font-size-sm: $font-size-base * 0.875 !default;
+$font-size-root: null !default;
+
+// 字重
+$font-weight-lighter: lighter !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+$font-weight-bolder: bolder !default;
+$font-weight-base: $font-weight-normal !default;
+
+// 行高
+$line-height-base: 1.5 !default;
+$line-height-lg: 2 !default;
+$line-height-sm: 1.25 !default;
+
+// 标题大小
+$h1-font-size: $font-size-base * 2.5 !default;
+$h2-font-size: $font-size-base * 2 !default;
+$h3-font-size: $font-size-base * 1.75 !default;
+$h4-font-size: $font-size-base * 1.5 !default;
+$h5-font-size: $font-size-base * 1.25 !default;
+$h6-font-size: $font-size-base !default;
+
+// 链接
+$link-color: $primary !default;
+$link-decoration: none !default;
+$link-hover-color: color.adjust($link-color, $lightness: 15%) !default;
+$link-hover-decoration: underline !default;
+
+// body
+$body-bg: $white !default;
+$body-color: $gray-900 !default;
+$body-text-align: null !default;
+
+// Spacing
+$spacer: 1rem !default;
+
+// Paragraphs
+
+$paragraph-margin-bottom: 1rem !default;
+
+// 字体其他部分 heading list hr 等等
+$headings-margin-bottom: calc($spacer / 2) !default;
+$headings-font-family: null !default;
+$headings-font-style: null !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: 1.2 !default;
+$headings-color: null !default;
+
+$display1-size: 6rem !default;
+$display2-size: 5.5rem !default;
+$display3-size: 4.5rem !default;
+$display4-size: 3.5rem !default;
+
+$display1-weight: 300 !default;
+$display2-weight: 300 !default;
+$display3-weight: 300 !default;
+$display4-weight: 300 !default;
+$display-line-height: $headings-line-height !default;
+
+$lead-font-size: $font-size-base * 1.25 !default;
+$lead-font-weight: 300 !default;
+
+$small-font-size: 0.875em !default;
+
+$sub-sup-font-size: 0.75em !default;
+
+$text-muted: $gray-600 !default;
+
+$initialism-font-size: $small-font-size !default;
+
+$blockquote-small-color: $gray-600 !default;
+$blockquote-small-font-size: $small-font-size !default;
+$blockquote-font-size: $font-size-base * 1.25 !default;
+
+$hr-color: inherit !default;
+$hr-height: 1px !default;
+$hr-opacity: 0.25 !default;
+
+$legend-margin-bottom: 0.5rem !default;
+$legend-font-size: 1.5rem !default;
+$legend-font-weight: null !default;
+
+$mark-padding: 0.2em !default;
+
+$dt-font-weight: $font-weight-bold !default;
+
+$nested-kbd-font-weight: $font-weight-bold !default;
+
+$list-inline-padding: 0.5rem !default;
+
+$mark-bg: #fcf8e3 !default;
+
+$hr-margin-y: $spacer !default;
+
+// Code
+
+$code-font-size: $small-font-size !default;
+$code-color: $pink !default;
+$pre-color: null !default;
+
+// options 可配置选项
+$enable-pointer-cursor-for-buttons: true !default;
+
+// 边框 和 border radius
+
+$border-width: 1px !default;
+$border-color: $gray-300 !default;
+
+$border-radius: 0.25rem !default;
+$border-radius-lg: 0.3rem !default;
+$border-radius-sm: 0.2rem !default;
+
+// 不同类型的 box shadow
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075) !default;
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
+$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175) !default;
+$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;
+
+// 按钮
+// 按钮基本属性
+$btn-font-weight: 400;
+$btn-padding-y: 0.375rem !default;
+$btn-padding-x: 0.75rem !default;
+$btn-font-family: $font-family-base !default;
+$btn-font-size: $font-size-base !default;
+$btn-line-height: $line-height-base !default;
+
+//不同大小按钮的 padding 和 font size
+$btn-padding-y-sm: 0.25rem !default;
+$btn-padding-x-sm: 0.5rem !default;
+$btn-font-size-sm: $font-size-sm !default;
+
+$btn-padding-y-lg: 0.5rem !default;
+$btn-padding-x-lg: 1rem !default;
+$btn-font-size-lg: $font-size-lg !default;
+
+// 按钮边框
+$btn-border-width: $border-width !default;
+$btn-border-color: $border-color !default;
+
+// 按钮其他
+$btn-box-shadow:
+    inset 0 1px 0 rgba($white, 0.15),
+    0 1px 1px rgba($black, 0.075) !default;
+$btn-disabled-opacity: 0.65 !default;
+
+// 链接按钮
+$btn-link-color: $link-color !default;
+$btn-link-hover-color: $link-hover-color !default;
+$btn-link-disabled-color: $gray-600 !default;
+
+// 按钮 radius
+$btn-border-radius: $border-radius !default;
+$btn-border-radius-lg: $border-radius-lg !default;
+$btn-border-radius-sm: $border-radius-sm !default;
+
+$btn-transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out !default;
+
+//alert
+$alert-font-weight: 400;
+$alert-font-family: $font-family-base !default;
+$alert-font-size: $font-size-base !default;
+$alert-line-height: $line-height-base !default;
+$alert-padding-y: 0.5rem !default;
+$alert-padding-x: 0.75rem !default;
+$alert-description-font-size: $font-size-sm !default;
+
+$alert-padding-sm: 0.5rem !default;
+$alert-margin: 1rem !default;
+$alert-margin-sm: 0.5rem !default;
+
+// menu
+$menu-border-width: $border-width !default;
+$menu-border-color: $border-color !default;
+$menu-box-shadow:
+    inset 0 1px 0 rgba($white, 0.15),
+    0 1px 1px rgba($black, 0.075) !default;
+$menu-transition:
+    color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out !default;
+
+// menu-item
+$menu-item-padding-y: 0.5rem !default;
+$menu-item-padding-x: 1rem !default;
+$menu-item-active-color: $primary !default;
+$menu-item-active-border-width: 2px !default;
+$menu-item-disabled-color: $gray-600 !default;
+
+//sub-menu
+//submenu
+$submenu-box-shadow:
+    0 2px 4px 0 rgba(0, 0, 0, 0.12),
+    0 0 6px 0 rgba(0, 0, 0, 0.04);
