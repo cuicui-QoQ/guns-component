@@ -19,11 +19,9 @@ const testProps = {
 const getMenu = (props: MenuProps) => {
     return (
         <Menu {...props}>
-            <MenuItem index={0}>active</MenuItem>
-            <MenuItem index={1} disabled>
-                disabled
-            </MenuItem>
-            <MenuItem index={2}>Menu3</MenuItem>
+            <MenuItem>active</MenuItem>
+            <MenuItem disabled>disabled</MenuItem>
+            <MenuItem>Menu3</MenuItem>
         </Menu>
     )
 }

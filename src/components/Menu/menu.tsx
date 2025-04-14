@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import cn from 'classnames'
+import { MenuItemProps } from './menuItem'
 
 export type MenuMode = 'horizontal' | 'vertical'
 
@@ -40,13 +41,30 @@ const Menu: React.FC<MenuProps> = ({
         [onSelect],
     )
 
+    // 过滤掉其他不是 MenuItem 的子元素
+    const renderChildren = () => {
+        return React.Children.map(children, (child, index) => {
+            const childElement = child as React.ReactElement<MenuItemProps>
+            const { name } = childElement.type as { name?: string }
+            if ('MenuItem' === name) {
+                return React.cloneElement(childElement, {
+                    index,
+                })
+            } else {
+                console.error(
+                    'MenuItem component must be used as a child of Menu component',
+                )
+            }
+        })
+    }
+
     // data-testid="test-menu" 用于测试
     return (
         <ul className={classes} style={style} data-testid="test-menu">
             <MenuContext.Provider
                 value={{ activeIndex, onClick: handleSelect }}
             >
-                {children}
+                {renderChildren()}
             </MenuContext.Provider>
         </ul>
     )
