@@ -11,7 +11,7 @@ import Menu, { MenuProps, MenuMode } from './menu.tsx'
 import MenuItem from './menuItem.tsx'
 
 const testProps = {
-    defaultIndex: 0,
+    defaultIndex: '0',
     className: 'test-class',
     onSelect: vi.fn(),
 }
@@ -67,7 +67,7 @@ describe('test Menu component', () => {
         // 点击后，点击事件应该被调用
         expect(testProps.onSelect).toHaveBeenCalledTimes(1)
         // 点击后，点击事件应该被调用，并且参数应该是2
-        expect(testProps.onSelect).toHaveBeenCalledWith(2)
+        expect(testProps.onSelect).toHaveBeenCalledWith('2')
     })
     it('should not change active when disabled item is clicked', () => {
         fireEvent.click(disabledItem)

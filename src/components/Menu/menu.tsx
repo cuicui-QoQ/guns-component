@@ -5,19 +5,20 @@ import { MenuItemProps } from './menuItem'
 export type MenuMode = 'horizontal' | 'vertical'
 
 export interface MenuProps {
-    defaultIndex?: number
+    defaultIndex?: string
     className?: string
     mode?: MenuMode
     style?: React.CSSProperties
-    onSelect?: (selectedIndex: number) => void
+    onSelect?: (selectedIndex: string) => void
     children?: React.ReactNode
 }
 
 export const MenuContext = React.createContext({
-    activeIndex: 0,
-    onClick: (index: number) => {
+    activeIndex: '0',
+    onClick: (index: string) => {
         console.log('click', index)
     },
+    mode: 'horizontal' as MenuMode,
 })
 
 const Menu: React.FC<MenuProps> = ({
@@ -25,7 +26,7 @@ const Menu: React.FC<MenuProps> = ({
     mode = 'horizontal',
     style = {},
     children,
-    defaultIndex = 0,
+    defaultIndex = '0',
     onSelect = () => {},
 }) => {
     const classes = cn('tums-menu', className, {
@@ -34,7 +35,7 @@ const Menu: React.FC<MenuProps> = ({
     })
     const [activeIndex, setActiveIndex] = useState(defaultIndex)
     const handleSelect = useCallback(
-        (index: number) => {
+        (index: string) => {
             setActiveIndex(index)
             onSelect(index)
         },
@@ -46,9 +47,9 @@ const Menu: React.FC<MenuProps> = ({
         return React.Children.map(children, (child, index) => {
             const childElement = child as React.ReactElement<MenuItemProps>
             const { name } = childElement.type as { name?: string }
-            if ('MenuItem' === name) {
+            if ('MenuItem' === name || 'SubMenu' === name) {
                 return React.cloneElement(childElement, {
-                    index,
+                    index: index.toString(),
                 })
             } else {
                 console.error(
@@ -62,7 +63,7 @@ const Menu: React.FC<MenuProps> = ({
     return (
         <ul className={classes} style={style} data-testid="test-menu">
             <MenuContext.Provider
-                value={{ activeIndex, onClick: handleSelect }}
+                value={{ activeIndex, onClick: handleSelect, mode }}
             >
                 {renderChildren()}
             </MenuContext.Provider>

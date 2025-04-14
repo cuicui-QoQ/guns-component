@@ -57,3 +57,75 @@
         color: $menu-item-active-color;
     }
 }
+
+@include b(sub-menu) {
+    padding: $menu-item-padding-x $menu-item-padding-y 0;
+
+    &:hover {
+        @include e(title) {
+            // 子菜单标题
+            color: $menu-item-active-color;
+        }
+    }
+    @include when(active) {
+        @include e(title) {
+            // 子菜单标题
+            color: $menu-item-active-color;
+        }
+    }
+
+    @include e(children) {
+        // 子菜单内容区
+        display: none;
+
+        @include when(open) {
+            display: block;
+        }
+    }
+
+    @include m(horizontal) {
+        position: relative;
+        border-bottom: $menu-border-width solid $menu-border-color;
+        @include when(active) {
+            border-bottom: $menu-border-width solid $menu-item-active-color;
+        }
+        &:hover {
+            border-bottom: $menu-border-width solid $menu-item-active-color;
+        }
+        @include e(children) {
+            position: absolute;
+            top: 56px;
+            background-color: #fff;
+            .tums-menu-item {
+                border-bottom-width: 0;
+                @include when(active) {
+                    bborder-bottom-width: 0;
+                }
+                &:hover {
+                    border-bottom-width: 0;
+                }
+            }
+        }
+    }
+
+    @include m(vertical) {
+        border-left: $menu-border-width solid $menu-border-color;
+        margin-left: 5px;
+        &:hover {
+            border-left-color: $menu-item-active-color;
+        }
+        @include when(active) {
+            border-left-color: $menu-item-active-color;
+        }
+
+        .tums-menu-item {
+            border-left-width: 0;
+            @include when(active) {
+                border-left-width: 0;
+            }
+            &:hover {
+                border-left-width: 0;
+            }
+        }
+    }
+}
