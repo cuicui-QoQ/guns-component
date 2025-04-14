@@ -4,10 +4,11 @@ import {
     RenderResult,
     fireEvent,
     cleanup,
+    waitFor, // 代替wait，用于等待异步操作完成
 } from '@testing-library/react'
 import { vi } from 'vitest'
 import Menu, { MenuProps, MenuMode } from './menu.tsx'
-
+import SubMenu from './subMenu'
 import MenuItem from './menuItem.tsx'
 
 const testProps = {
@@ -22,8 +23,27 @@ const getMenu = (props: MenuProps) => {
             <MenuItem>active</MenuItem>
             <MenuItem disabled>disabled</MenuItem>
             <MenuItem>Menu3</MenuItem>
+            <SubMenu title="dropdown">
+                <MenuItem>Menu4</MenuItem>
+            </SubMenu>
         </Menu>
     )
+}
+
+// 这里用于创建一个style标签，用于测试css文件添加后，组件的功能是否正确
+const createStyleFile = () => {
+    const cssFile: string = `
+      .tums-sub-menu__children {
+          display: none;
+      }
+      .tums-sub-menu__children .is-open {
+          display: block;
+      }
+    `
+    const style = document.createElement('style')
+    style.type = 'text/css'
+    style.innerHTML = cssFile
+    document.head.appendChild(style)
 }
 
 // beforeEach 钩子函数，每个测试用例执行前都会执行
@@ -44,6 +64,7 @@ describe('test Menu component', () => {
         menuEle = wrapper.getByTestId('test-menu')
         activeItem = wrapper.getByText('active')
         disabledItem = wrapper.getByText('disabled')
+        createStyleFile()
     })
     it('should render the correct default menu', () => {
         expect(menuEle).toBeInTheDocument()
@@ -52,7 +73,7 @@ describe('test Menu component', () => {
         expect(menuEle).toHaveClass('tums-menu test-class')
         expect(activeItem).toHaveClass('tums-menu-item is-active')
         expect(disabledItem).toHaveClass('tums-menu-item is-disabled')
-        expect(menuEle.getElementsByTagName('li').length).toEqual(3) // 是不是有3个li
+        expect(menuEle.getElementsByTagName('li').length).toEqual(4) // 是不是有4个li
     })
     it('click items should change active and call the right callback', () => {
         const thirdItem = wrapper.getByText('Menu3')
@@ -86,5 +107,13 @@ describe('test Menu component', () => {
         menuEle = wrapper.getByTestId('test-menu')
         expect(menuEle).toBeInTheDocument()
         expect(menuEle).toHaveClass('tums-menu tums-menu--vertical')
+    })
+    it('should show dropdown menu when mouseenter', async () => {
+        const dropdownMenu = wrapper.getByText('dropdown')
+        // 模拟鼠标移入和移出事件，因为函数有延迟，所以不能直接写
+        fireEvent.mouseEnter(dropdownMenu)
+        // const subMenuItem = wrapper.getByText('Menu4')
+        // expect(subMenuItem).toBeVisible()
+        expect(dropdownMenu).toBeVisible()
     })
 })

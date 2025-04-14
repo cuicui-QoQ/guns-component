@@ -10,8 +10,12 @@ export interface SubMenuProps {
     children?: React.ReactNode
 }
 
-let timer: any
-const handleMouse = (e: React.MouseEvent, toggle: boolean, cb) => {
+let timer: NodeJS.Timeout
+const handleMouse = (
+    e: React.MouseEvent,
+    toggle: boolean,
+    cb: (toggle: boolean) => void,
+) => {
     clearTimeout(timer)
     e.preventDefault()
     timer = setTimeout(() => {
