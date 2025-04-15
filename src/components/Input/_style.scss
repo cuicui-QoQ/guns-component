@@ -1,0 +1,30 @@
+@include b(input) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @include e(inner) {
+        border: 1px solid #000;
+        padding: 1px 2px;
+
+        @include when(focused) {
+            border: 3px solid #bfa;
+        }
+
+        input {
+            border: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    @include m(lg) {
+        height: 40px;
+    }
+
+    @include m(sm) {
+        height: 24px;
+    }
+}
