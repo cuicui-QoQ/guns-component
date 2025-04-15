@@ -23,7 +23,7 @@ describe('test Button componet', () => {
         expect(ele).toBeInTheDocument() // 是不是已经在页面上了
         expect(ele.tagName).toEqual('BUTTON') // TagName
         expect(ele.disabled).toBeFalsy() // 可点击
-        expect(ele).toHaveClass('tums-button tums-button--default') // 是不是有这个class
+        expect(ele).toHaveClass('guns-button guns-button--default') // 是不是有这个class
         fireEvent.click(ele)
         expect(defaultProps.onClick).toHaveBeenCalled() // 是不是被点击了
     })
@@ -37,7 +37,7 @@ describe('test Button componet', () => {
         const ele = wrapper.getByText('Nice')
         expect(ele).toBeInTheDocument() // 是不是已经在页面上了
         expect(ele).toHaveClass(
-            'tums-button tums-button--primary test-class tums-button--lg',
+            'guns-button guns-button--primary test-class guns-button--lg',
         ) // 是不是有class
     })
     it('should render a link when btnType equals link and href is provided', () => {
@@ -49,7 +49,7 @@ describe('test Button componet', () => {
         )
         const ele = wrapper.getByText('Link')
         expect(ele).toBeInTheDocument() // 是不是已经在页面上了
-        expect(ele).toHaveClass('tums-button tums-button--link') // 是不是有class
+        expect(ele).toHaveClass('guns-button guns-button--link') // 是不是有class
         expect(ele.tagName).toEqual('A') // TagName
         expect(ele).toHaveAttribute('href', testUrl) // 是不是有href属性, 并且值是testUrl
     })

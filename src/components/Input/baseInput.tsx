@@ -35,10 +35,10 @@ const BaseInput = React.forwardRef<HolderRef, BaseInputProps>((props, ref) => {
         },
     )
 
-    const inputClassName = cn('tums-input__input')
+    const inputClassName = cn('guns-input__input')
 
-    const innerClassName = cn('tums-input__input-inner', {
-        'tums-input__input-inner--focused': focused,
+    const innerClassName = cn('guns-input__input-inner', {
+        'guns-input__input-inner--focused': focused,
     })
 
     return (

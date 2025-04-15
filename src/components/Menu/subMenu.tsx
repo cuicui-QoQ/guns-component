@@ -39,13 +39,13 @@ const SubMenu: React.FC<SubMenuProps> = ({
     const [isOpen, setOpen] = useState(false)
 
     const { mode, activeIndex } = useContext(MenuContext)
-    const classes = cn('tums-sub-menu', className, {
-        'tums-sub-menu--vertical': 'vertical' === mode,
-        'tums-sub-menu--horizontal': mode !== 'vertical',
+    const classes = cn('guns-sub-menu', className, {
+        'guns-sub-menu--vertical': 'vertical' === mode,
+        'guns-sub-menu--horizontal': mode !== 'vertical',
         'is-active': isPre(activeIndex, index!),
     })
 
-    const childrenClassName = cn('tums-sub-menu__children', {
+    const childrenClassName = cn('guns-sub-menu__children', {
         'is-open': isOpen,
     })
 
@@ -80,7 +80,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
     return (
         <div className={classes} {...mouseEvents}>
             <div
-                className="tums-sub-menu__title"
+                className="guns-sub-menu__title"
                 onClick={() => {
                     if (mode !== 'horizontal') {
                         setOpen(!isOpen)

@@ -50,20 +50,20 @@ const Alert: React.FC<BaseAlertProps> = ({
 }) => {
     const [show, setShow] = useState(true)
 
-    const classes = cn('tums-alert', className, {
-        [`tums-alert--${type}`]: type,
+    const classes = cn('guns-alert', className, {
+        [`guns-alert--${type}`]: type,
     })
 
-    const textViewClass = cn('tums-alert__text')
+    const textViewClass = cn('guns-alert__text')
 
-    const descClass = cn('tums-alert__description')
+    const descClass = cn('guns-alert__description')
 
     return (
         <>
             {show && (
                 <div className={classes}>
                     {showIcon && (
-                        <div className="tums-alert__icon">
+                        <div className="guns-alert__icon">
                             {icon ? icon : getIconByType(type)}
                         </div>
                     )}
@@ -75,7 +75,7 @@ const Alert: React.FC<BaseAlertProps> = ({
                     </div>
                     {action}
                     {closable && (
-                        <div className="tums-alert__closeIcon">
+                        <div className="guns-alert__closeIcon">
                             <Icon
                                 icon="xmark"
                                 onClick={e => {

@@ -33,10 +33,10 @@ const getMenu = (props: MenuProps) => {
 // 这里用于创建一个style标签，用于测试css文件添加后，组件的功能是否正确
 const createStyleFile = () => {
     const cssFile: string = `
-      .tums-sub-menu__children {
+      .guns-sub-menu__children {
           display: none;
       }
-      .tums-sub-menu__children .is-open {
+      .guns-sub-menu__children .is-open {
           display: block;
       }
     `
@@ -70,9 +70,9 @@ describe('test Menu component', () => {
         expect(menuEle).toBeInTheDocument()
         expect(activeItem).toBeInTheDocument()
         expect(disabledItem).toBeInTheDocument()
-        expect(menuEle).toHaveClass('tums-menu test-class')
-        expect(activeItem).toHaveClass('tums-menu-item is-active')
-        expect(disabledItem).toHaveClass('tums-menu-item is-disabled')
+        expect(menuEle).toHaveClass('guns-menu test-class')
+        expect(activeItem).toHaveClass('guns-menu-item is-active')
+        expect(disabledItem).toHaveClass('guns-menu-item is-disabled')
         expect(menuEle.getElementsByTagName('li').length).toEqual(4) // 是不是有4个li
     })
     it('click items should change active and call the right callback', () => {
@@ -106,7 +106,7 @@ describe('test Menu component', () => {
         wrapper = render(getMenu(testVerProps))
         menuEle = wrapper.getByTestId('test-menu')
         expect(menuEle).toBeInTheDocument()
-        expect(menuEle).toHaveClass('tums-menu tums-menu--vertical')
+        expect(menuEle).toHaveClass('guns-menu guns-menu--vertical')
     })
     it('should show dropdown menu when mouseenter', async () => {
         const dropdownMenu = wrapper.getByText('dropdown')

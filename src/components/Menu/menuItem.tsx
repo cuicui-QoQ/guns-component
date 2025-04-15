@@ -18,7 +18,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     children,
 }) => {
     const { activeIndex, onClick } = useContext(MenuContext)
-    const classes = cn('tums-menu-item', className, {
+    const classes = cn('guns-menu-item', className, {
         'is-disabled': disabled,
         'is-active': activeIndex === index,
     })

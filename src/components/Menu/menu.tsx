@@ -29,9 +29,9 @@ const Menu: React.FC<MenuProps> = ({
     defaultIndex = '0',
     onSelect = () => {},
 }) => {
-    const classes = cn('tums-menu', className, {
-        'tums-menu--vertical': 'vertical' === mode,
-        'tums-menu--horizontal': mode !== 'vertical',
+    const classes = cn('guns-menu', className, {
+        'guns-menu--vertical': 'vertical' === mode,
+        'guns-menu--horizontal': mode !== 'vertical',
     })
     const [activeIndex, setActiveIndex] = useState(defaultIndex)
     const handleSelect = useCallback(

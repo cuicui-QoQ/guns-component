@@ -61,8 +61,8 @@ const Input: React.FC<InputProps> = ({
         resetProps.value = fixControlledValue(resetProps.value)
     }
 
-    const classes = cn('tums-input', resetProps.className, {
-        [`tums-input--${size}`]: size,
+    const classes = cn('guns-input', resetProps.className, {
+        [`guns-input--${size}`]: size,
     })
 
     // ====================== Value =======================
@@ -175,7 +175,7 @@ const Input: React.FC<InputProps> = ({
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 onKeyUp={handleKeyUp}
-                className={'tums-input__input'}
+                className={'guns-input__input'}
                 // style={styles?.input}
                 ref={inputRef}
                 size={htmlSize}

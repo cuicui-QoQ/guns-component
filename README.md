@@ -1,1 +1,1 @@
-# tums-component
+# guns-component

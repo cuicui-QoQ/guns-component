@@ -96,7 +96,7 @@
             position: absolute;
             top: 56px;
             background-color: #fff;
-            .tums-menu-item {
+            .guns-menu-item {
                 border-bottom-width: 0;
                 @include when(active) {
                     bborder-bottom-width: 0;
@@ -118,7 +118,7 @@
             border-left-color: $menu-item-active-color;
         }
 
-        .tums-menu-item {
+        .guns-menu-item {
             border-left-width: 0;
             @include when(active) {
                 border-left-width: 0;
