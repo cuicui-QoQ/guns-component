@@ -37,9 +37,16 @@ const isDebug = true
 const myConsole = {
     log: (...args: any[]) => {
         if (isDebug) {
-            // console.log('myConsole.log', ...args)
+            console.log('myConsole.log', ...args)
         }
     },
+}
+
+const fixControlledValue = (value: any) => {
+    if (value === undefined || null === value) {
+        return ''
+    }
+    return String(value)
 }
 
 const Input: React.FC<InputProps> = ({
@@ -47,6 +54,13 @@ const Input: React.FC<InputProps> = ({
     size = InputSize.Standard,
     ...resetProps
 }) => {
+    if ('value' in resetProps) {
+        // 避免同时传入value和defaultValue
+        delete resetProps.defaultValue
+        // 避免传入value是undefined或者null
+        resetProps.value = fixControlledValue(resetProps.value)
+    }
+
     const classes = cn('tums-input', resetProps.className, {
         [`tums-input--${size}`]: size,
     })
@@ -55,6 +69,7 @@ const Input: React.FC<InputProps> = ({
     const [value, setValue] = useMergedState(resetProps.defaultValue, {
         value: resetProps.value,
     })
+    // const [value, setValue] = useState<string>(String(resetProps.value ?? ''))
 
     const formatValue =
         value === undefined || null === value ? '' : String(value)
@@ -87,6 +102,10 @@ const Input: React.FC<InputProps> = ({
     const onInternalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.nativeEvent.target as HTMLInputElement
         myConsole.log('onInternalChange', input?.value)
+        // FIX ME; 这里和阿里的不一样
+        const { onChange } = resetProps
+        setValue(e.target.value)
+        onChange?.(e)
     }
 
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
