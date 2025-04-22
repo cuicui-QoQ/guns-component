@@ -1,8 +1,8 @@
 import Input, { InputSize } from '../src/components/Input/input'
 import React, { useState } from 'react'
+import { ChangeEvent } from 'react'
 function InputExample() {
     const [value, setValue] = useState<string>()
-
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         console.log('handleChange', e.target.value)
         setValue(e.target.value)
@@ -17,6 +17,7 @@ function InputExample() {
                 placeholder="受控组件"
                 defaultValue={'13'}
             />
+            123
             <br />
             <br />
             <Input
@@ -30,6 +31,13 @@ function InputExample() {
             <br />
             <br />
             <Input addonAfter="MB" />
+            <br />
+            <br />
+            <Input
+                addonAfter="MB"
+                prepand="前缀在框里面"
+                append="后缀在框里面"
+            />
             <br />
             <br />
             <Input size={InputSize.Large} placeholder="大框" />
@@ -49,24 +57,17 @@ function InputExample() {
             />
             <br />
             <br />
+            <Input prepand="prepand" append="append" placeholder="请输入" />
+            <br />
+            <br />
             <Input
-                size={InputSize.Large}
-                prepand="prepand"
+                prepand={<span>自适应传入的prepand</span>}
                 append="append"
                 placeholder="请输入"
             />
             <br />
             <br />
             <Input
-                size={InputSize.Large}
-                prepand={<div style={{ height: '40px' }}>Hello</div>}
-                append="append"
-                placeholder="请输入"
-            />
-            <br />
-            <br />
-            <Input
-                size={InputSize.Large}
                 prepand="prepand"
                 append="append"
                 placeholder="请输入"

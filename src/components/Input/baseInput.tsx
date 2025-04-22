@@ -35,22 +35,26 @@ const BaseInput = React.forwardRef<HolderRef, BaseInputProps>((props, ref) => {
         },
     )
 
-    const inputClassName = cn('guns-input__input')
+    const inputClassName = cn('guns-input')
 
-    const innerClassName = cn('guns-input__input-inner', {
-        'guns-input__input-inner--focused': focused,
+    const innerClassName = cn('guns-input__inner', {
+        'is-focused': focused,
     })
 
+    const inputContainer = cn('guns-input__container')
+
     return (
-        <span className={inputClassName}>
-            {addonBefore && <span>{addonBefore}</span>}
-            <span className={innerClassName}>
-                {prepand && <span>{prepand}</span>}
-                {element}
-                {append && <span>{append}</span>}
+        <div className={inputContainer}>
+            <span className={inputClassName}>
+                {addonBefore && <span>{addonBefore}</span>}
+                <span className={innerClassName}>
+                    {prepand && <span>{prepand}</span>}
+                    {element}
+                    {append && <span>{append}</span>}
+                </span>
+                {addonAfter && <span>{addonAfter}</span>}
             </span>
-            {addonAfter && <span>{addonAfter}</span>}
-        </span>
+        </div>
     )
 })
 

@@ -3,12 +3,17 @@
     flex-direction: row;
     align-items: center;
 
+    @include e(container) {
+        display: inline-block;
+    }
+
     @include e(inner) {
-        border: 1px solid #000;
+        border: 1px solid #0006;
+        border-radius: 2px;
         padding: 1px 2px;
 
         @include when(focused) {
-            border: 3px solid #bfa;
+            border: 1px solid $geekblue-8;
         }
 
         input {
@@ -20,11 +25,15 @@
         }
     }
 
-    @include m(lg) {
-        height: 40px;
-    }
+    @include e(inner-input) {
+        height: 32px;
 
-    @include m(sm) {
-        height: 24px;
+        @include m(lg) {
+            height: 40px;
+        }
+
+        @include m(sm) {
+            height: 24px;
+        }
     }
 }

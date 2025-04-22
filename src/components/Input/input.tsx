@@ -1,10 +1,4 @@
-import React, {
-    useRef,
-    useEffect,
-    forwardRef,
-    ReactNode,
-    useState,
-} from 'react'
+import React, { useRef, useEffect, ReactNode, useState } from 'react'
 import cn from 'classnames'
 import { IconProps } from '../Icon/icon'
 import useMergedState from '../hooks/useMergedState'
@@ -16,6 +10,10 @@ export enum InputSize {
     Small = 'sm',
     Standard = 'std',
 }
+
+// TODO：
+// input的icon问题
+//
 
 export interface InputProps
     extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -35,14 +33,14 @@ export interface InputProps
 const isDebug = true
 
 const myConsole = {
-    log: (...args: any[]) => {
+    log: (...args: unknown[]) => {
         if (isDebug) {
             console.log('myConsole.log', ...args)
         }
     },
 }
 
-const fixControlledValue = (value: any) => {
+const fixControlledValue = (value: unknown): string => {
     if (value === undefined || null === value) {
         return ''
     }
@@ -61,8 +59,8 @@ const Input: React.FC<InputProps> = ({
         resetProps.value = fixControlledValue(resetProps.value)
     }
 
-    const classes = cn('guns-input', resetProps.className, {
-        [`guns-input--${size}`]: size,
+    const classes = cn('guns-input__inner-input', {
+        [`guns-input__inner-input--${size}`]: size,
     })
 
     // ====================== Value =======================
@@ -71,8 +69,8 @@ const Input: React.FC<InputProps> = ({
     })
     // const [value, setValue] = useState<string>(String(resetProps.value ?? ''))
 
-    const formatValue =
-        value === undefined || null === value ? '' : String(value)
+    // const formatValue =
+    //     value === undefined || null === value ? '' : String(value)
 
     const [focused, setFocused] = useState(false)
 
@@ -86,18 +84,12 @@ const Input: React.FC<InputProps> = ({
         // setFocused((prev) => (prev && disabled ? false : prev));
     }, [disabled])
 
-    const { prepand, append, type, autoComplete } = resetProps
+    const { type, autoComplete } = resetProps
 
     const { onPressEnter } = resetProps
 
     // 	规定以字符数计的 <input> 元素的宽度。默认值是 20
     const htmlSize: number = 20
-
-    const height = {
-        [InputSize.Large]: '40px',
-        [InputSize.Small]: '24px',
-        [InputSize.Standard]: '32px',
-    }
 
     const onInternalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.nativeEvent.target as HTMLInputElement
@@ -175,8 +167,7 @@ const Input: React.FC<InputProps> = ({
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 onKeyUp={handleKeyUp}
-                className={'guns-input__input'}
-                // style={styles?.input}
+                className={classes}
                 ref={inputRef}
                 size={htmlSize}
                 type={type}
