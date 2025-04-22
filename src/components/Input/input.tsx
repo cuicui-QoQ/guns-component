@@ -30,7 +30,7 @@ export interface InputProps
     onPressEnter?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
-const isDebug = true
+const isDebug = false
 
 const myConsole = {
     log: (...args: unknown[]) => {
@@ -69,8 +69,9 @@ const Input: React.FC<InputProps> = ({
     })
     // const [value, setValue] = useState<string>(String(resetProps.value ?? ''))
 
-    // const formatValue =
-    //     value === undefined || null === value ? '' : String(value)
+    // todo 后续这里用于计数输入值的长度
+    const formatValue =
+        value === undefined || null === value ? '' : String(value)
 
     const [focused, setFocused] = useState(false)
 
