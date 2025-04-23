@@ -24,6 +24,29 @@ const email: Email[] = sugg.map((val, idx) => {
     }
 })
 
+function AutoCompleteGithubExample() {
+    const handleFetchGithub = (val: string) => {
+        return fetch(`https://api.github.com/search/users?q=${val}`)
+            .then(res => res.json())
+            .then(({ items }) => {
+                const formatItems = items.slice(0, 10).map((it: any) => {
+                    return {
+                        value: it.login,
+                        ...it,
+                    }
+                })
+                return formatItems
+            })
+    }
+
+    return (
+        <AutoComplete
+            prepand="异步调用github"
+            fetchSuggestions={handleFetchGithub}
+        ></AutoComplete>
+    )
+}
+
 function AutoCompleteExample() {
     const renderOpt = (it: DataSourceType<Email>) => {
         return (
@@ -32,12 +55,34 @@ function AutoCompleteExample() {
             </p>
         )
     }
+
+    const handleFetch: (str: string) => Promise<DataSourceType<Email>[]> = (
+        val: string,
+    ) => {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve(
+                    email.filter(it => {
+                        return it.value.indexOf(val) !== -1
+                    }),
+                )
+            }, 400)
+        })
+    }
+
     return (
         <>
+            <AutoCompleteGithubExample />
             <AutoComplete
-                fetchSuggestions={(val: string) => {
+                prepand="异步的"
+                fetchSuggestions={handleFetch}
+                renderOption={renderOpt}
+            ></AutoComplete>
+            <AutoComplete
+                prepand="非异步的"
+                fetchSuggestions={(str: string) => {
                     return email.filter(it => {
-                        return it.value.indexOf(val) !== -1
+                        return it.value.indexOf(str) !== -1
                     })
                 }}
                 renderOption={renderOpt}
