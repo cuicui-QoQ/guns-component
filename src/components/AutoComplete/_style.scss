@@ -1,0 +1,24 @@
+@use 'sass:color';
+
+@include b(auto-complete) {
+    position: relative;
+    display: inline-block;
+    @include e(dropdown) {
+        position: absolute;
+        z-index: 1;
+        top: 100%;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+    }
+    @include e(dropdown-item) {
+        align-items: center;
+        padding: 0px 12px;
+        cursor: pointer;
+        @include when(active) {
+            background-color: #ccc;
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import React, { FC, useState, ChangeEvent, useEffect } from 'react'
-
+import cn from 'classnames'
 import Input, { InputProps } from '../Input/input'
 import Icon from '../Icon/icon'
 import useDebounce from '../hooks/useDebounce'
@@ -39,6 +39,8 @@ const AutoComplete: FC<AutoCompleteProps> = props => {
     const [inputValue, setInputValue] = useState<string>(formatVal(value))
     const [suggestions, setSuggestions] = useState<DataSourceType[]>([])
 
+    const [hightlightIndex, setHightlightIndex] = useState<number>(-1)
+
     const [loading, setLoading] = useState(false)
 
     const debounceInputValue = useDebounce(inputValue, 400)
@@ -53,7 +55,6 @@ const AutoComplete: FC<AutoCompleteProps> = props => {
     }
 
     useEffect(() => {
-        console.log('inputValue', debounceInputValue)
         handleFetch(debounceInputValue)
     }, [debounceInputValue])
 
@@ -81,26 +82,55 @@ const AutoComplete: FC<AutoCompleteProps> = props => {
     }
 
     const generateDropdown = () => {
+        const dropdownClassName = cn('guns-auto-complete__dropdown')
         return (
-            <ul>
+            <div className={dropdownClassName}>
                 {suggestions.map((it, idx) => {
                     return (
-                        <li
+                        <div
+                            className={cn('guns-auto-complete__dropdown-item', {
+                                'is-active': hightlightIndex === idx,
+                            })}
                             key={idx}
                             onClick={() => {
                                 handleClickItem(it)
                             }}
                         >
                             {renderTemplate(it)}
-                        </li>
+                        </div>
                     )
                 })}
-            </ul>
+            </div>
         )
     }
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        const { key } = e
+        if ('ArrowDown' === key) {
+            if (hightlightIndex < suggestions.length - 1) {
+                setHightlightIndex(hightlightIndex + 1)
+            }
+            e.preventDefault()
+        } else if ('ArrowUp' === key) {
+            if (hightlightIndex > 0) {
+                setHightlightIndex(hightlightIndex - 1)
+            }
+            e.preventDefault()
+        } else if ('Enter' === key) {
+            if (hightlightIndex > -1) {
+                setHightlightIndex(-1)
+                handleClickItem(suggestions[hightlightIndex])
+            }
+        } else if ('Escape' === key) {
+            setHightlightIndex(-1)
+            setSuggestions([])
+        }
+    }
+
+    const autoCompleteClassName = cn('guns-auto-complete', restProps.className)
+
     return (
-        <div>
+        <div className={autoCompleteClassName} onKeyDown={handleKeyDown}>
             <Input value={inputValue} {...restProps} onChange={handleChange} />
             {loading && (
                 <div>
