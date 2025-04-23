@@ -1,8 +1,9 @@
-import React, { FC, useState, ChangeEvent, useEffect } from 'react'
+import React, { FC, useState, ChangeEvent, useEffect, useRef } from 'react'
 import cn from 'classnames'
 import Input, { InputProps } from '../Input/input'
 import Icon from '../Icon/icon'
 import useDebounce from '../hooks/useDebounce'
+import useClickOutside from '../hooks/useClickOutside'
 
 export interface DataSourceObject {
     value: string
@@ -45,8 +46,15 @@ const AutoComplete: FC<AutoCompleteProps> = props => {
 
     const debounceInputValue = useDebounce(inputValue, 400)
 
+    const triggerSearch = useRef(false)
+
+    const componentRef = useRef<HTMLDivElement>(null)
+
+    useClickOutside(componentRef, () => {
+        setSuggestions([])
+    })
     const handleFetch = async (str: string) => {
-        if (str.length !== 0) {
+        if (str.length !== 0 && !triggerSearch.current) {
             setLoading(true)
             const res = await fetchSuggestions(str)
             setSuggestions(res)
@@ -59,6 +67,7 @@ const AutoComplete: FC<AutoCompleteProps> = props => {
     }, [debounceInputValue])
 
     const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        triggerSearch.current = false
         onChange?.(e)
         const val = e.target.value.trim()
         setInputValue(val)
@@ -84,22 +93,32 @@ const AutoComplete: FC<AutoCompleteProps> = props => {
     const generateDropdown = () => {
         const dropdownClassName = cn('guns-auto-complete__dropdown')
         return (
-            <div className={dropdownClassName}>
-                {suggestions.map((it, idx) => {
-                    return (
-                        <div
-                            className={cn('guns-auto-complete__dropdown-item', {
-                                'is-active': hightlightIndex === idx,
-                            })}
-                            key={idx}
-                            onClick={() => {
-                                handleClickItem(it)
-                            }}
-                        >
-                            {renderTemplate(it)}
-                        </div>
-                    )
-                })}
+            <div className={dropdownClassName} ref={componentRef}>
+                {!loading &&
+                    suggestions.length > 0 &&
+                    suggestions.map((it, idx) => {
+                        return (
+                            <div
+                                className={cn(
+                                    'guns-auto-complete__dropdown-item',
+                                    {
+                                        'is-active': hightlightIndex === idx,
+                                    },
+                                )}
+                                key={idx}
+                                onClick={() => {
+                                    handleClickItem(it)
+                                }}
+                            >
+                                {renderTemplate(it)}
+                            </div>
+                        )
+                    })}
+                {loading && (
+                    <div>
+                        <Icon icon="spinner" spin></Icon>
+                    </div>
+                )}
             </div>
         )
     }
@@ -118,6 +137,7 @@ const AutoComplete: FC<AutoCompleteProps> = props => {
             e.preventDefault()
         } else if ('Enter' === key) {
             if (hightlightIndex > -1) {
+                triggerSearch.current = true
                 setHightlightIndex(-1)
                 handleClickItem(suggestions[hightlightIndex])
             }
@@ -132,12 +152,7 @@ const AutoComplete: FC<AutoCompleteProps> = props => {
     return (
         <div className={autoCompleteClassName} onKeyDown={handleKeyDown}>
             <Input value={inputValue} {...restProps} onChange={handleChange} />
-            {loading && (
-                <div>
-                    <Icon icon="spinner" spin></Icon>
-                </div>
-            )}
-            {!loading && suggestions.length > 0 && generateDropdown()}
+            {generateDropdown()}
         </div>
     )
 }
