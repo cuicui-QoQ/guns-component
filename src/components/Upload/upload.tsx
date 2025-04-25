@@ -13,6 +13,12 @@ export interface UploadProps {
     onChange?: (file: File) => void
     defaultFileList?: UploadFile[]
     onRemove?: (file: UploadFile) => void
+    headers?: { [key: string]: any }
+    name?: string
+    data?: { [key: string]: any }
+    withCredentials?: boolean
+    accept?: string
+    multiple?: boolean
 }
 
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
@@ -38,6 +44,12 @@ const Upload: React.FC<UploadProps> = props => {
         onChange,
         defaultFileList,
         onRemove,
+        headers,
+        name,
+        data,
+        withCredentials,
+        accept,
+        multiple,
     } = props
     const [fileList, setFileList] = React.useState<UploadFile[]>(
         defaultFileList || [],
@@ -77,14 +89,23 @@ const Upload: React.FC<UploadProps> = props => {
             raw: file,
             percent: 0,
         }
-        setFileList([_file, ...fileList])
+        setFileList(prevList => {
+            return [_file, ...prevList]
+        })
         const formData = new FormData()
-        formData.append(file.name, file)
+        formData.append(name || file.name, file)
+        if (data) {
+            Object.keys(data).forEach(key => {
+                formData.append(key, data[key])
+            })
+        }
         axios
             .post(action, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    ...headers,
                 },
+                withCredentials,
                 onUploadProgress: e => {
                     const percentage = Math.round(
                         (e.loaded * 100) / (e.total || 100),
@@ -163,6 +184,8 @@ const Upload: React.FC<UploadProps> = props => {
                 Upload file
             </Button>
             <input
+                accept={accept}
+                multiple={multiple}
                 className="guns-upload__input-file"
                 style={{ display: 'none' }}
                 ref={fileInput}

@@ -81,7 +81,14 @@ function UploadExample() {
                 }}
                 onSuccess={handleOnSuccess}
                 onError={handleOnError}
+                name="testFileName"
+                data={{ key: 'value' }}
+                headers={{
+                    'X-Powered-By': 'Guns',
+                }}
             ></Upload>
+            <h5>下面这是自定义的更新组件-只允许上传一个或者多个html文件</h5>
+            <Upload action={actionUrl} accept=".html" multiple={true}></Upload>
             <h5>下面这是自定义的更新组件-beforeUpload有校验</h5>
             <Upload
                 action={actionUrl}
