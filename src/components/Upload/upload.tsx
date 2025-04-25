@@ -12,9 +12,41 @@ export interface UploadProps {
     onChange?: (file: File) => void
 }
 
+export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
+
+export interface UploadFile {
+    uid: string
+    size: number
+    name: string
+    status?: UploadFileStatus
+    percent?: number
+    raw?: File
+    response?: any
+    error?: any
+}
+
 const Upload: React.FC<UploadProps> = props => {
     const { action, onProgress, onSuccess, onError, beforeUpload, onChange } =
         props
+    const [fileList, setFileList] = React.useState<UploadFile[]>([])
+
+    const uploadFile = (
+        uploadFile: UploadFile,
+        uploadObj: Partial<UploadFile>,
+    ) => {
+        setFileList((prevFileList: UploadFile[]) => {
+            return prevFileList.map(file => {
+                if (file.uid === uploadFile.uid) {
+                    return {
+                        ...file,
+                        ...uploadObj,
+                    }
+                }
+                return file
+            })
+        })
+    }
+
     const classes = cn('guns-upload')
     const fileInput = useRef<HTMLInputElement>(null)
     const handleClick = () => {
@@ -24,6 +56,15 @@ const Upload: React.FC<UploadProps> = props => {
     }
 
     const post = (file: File) => {
+        const _file: UploadFile = {
+            uid: Date.now() + '-upload-file',
+            status: 'ready',
+            name: file.name,
+            size: file.size,
+            raw: file,
+            percent: 0,
+        }
+        setFileList([_file, ...fileList])
         const formData = new FormData()
         formData.append(file.name, file)
         axios
@@ -35,15 +76,26 @@ const Upload: React.FC<UploadProps> = props => {
                     const percentage = Math.round(
                         (e.loaded * 100) / (e.total || 100),
                     )
-                    console.log('onUploadProgress', percentage)
+                    uploadFile(_file, {
+                        status: 'uploading',
+                        percent: percentage,
+                    })
                     onProgress?.(percentage, file)
                 },
             })
             .then(res => {
+                uploadFile(_file, {
+                    status: 'success',
+                    response: res.data,
+                })
                 onSuccess?.(res, file)
                 onChange?.(file)
             })
             .catch(res => {
+                uploadFile(_file, {
+                    status: 'error',
+                    response: res.data,
+                })
                 onError?.(res, file)
                 onChange?.(file)
             })
@@ -51,7 +103,6 @@ const Upload: React.FC<UploadProps> = props => {
 
     const uploadFiles = (files: FileList) => {
         for (let i = 0; i < files.length; i++) {
-            console.log(i, files[i].name)
             if (!beforeUpload) {
                 post(files[i])
             } else {
