@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import Button, { ButtonType } from '../Button/button'
+import UploadList from './uploadList'
 import cn from 'classnames'
 import axios from 'axios'
 
@@ -10,6 +11,8 @@ export interface UploadProps {
     onError?: (err: any, file: File) => void
     beforeUpload?: (file: File) => boolean | Promise<File>
     onChange?: (file: File) => void
+    defaultFileList?: UploadFile[]
+    onRemove?: (file: UploadFile) => void
 }
 
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
@@ -26,9 +29,19 @@ export interface UploadFile {
 }
 
 const Upload: React.FC<UploadProps> = props => {
-    const { action, onProgress, onSuccess, onError, beforeUpload, onChange } =
-        props
-    const [fileList, setFileList] = React.useState<UploadFile[]>([])
+    const {
+        action,
+        onProgress,
+        onSuccess,
+        onError,
+        beforeUpload,
+        onChange,
+        defaultFileList,
+        onRemove,
+    } = props
+    const [fileList, setFileList] = React.useState<UploadFile[]>(
+        defaultFileList || [],
+    )
 
     const uploadFile = (
         uploadFile: UploadFile,
@@ -135,7 +148,11 @@ const Upload: React.FC<UploadProps> = props => {
 
     return (
         <div className={classes}>
-            <Button btnType={ButtonType.Primary} onClick={handleClick}>
+            <Button
+                btnType={ButtonType.Primary}
+                onClick={handleClick}
+                style={{ width: '200px' }}
+            >
                 Upload file
             </Button>
             <input
@@ -145,6 +162,7 @@ const Upload: React.FC<UploadProps> = props => {
                 type="file"
                 onChange={handleFileChange}
             />
+            <UploadList fileList={fileList} onRemove={onRemove}></UploadList>
         </div>
     )
 }

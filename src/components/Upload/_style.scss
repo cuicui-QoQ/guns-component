@@ -1,0 +1,30 @@
+@include b(upload-list) {
+    padding: 0;
+}
+
+@include b(upload-list-item) {
+    padding: 0;
+    .file-name-block {
+        @include when(error) {
+            color: $danger;
+        }
+
+        .file-name {
+            padding-right: 12px;
+            padding-left: 4px;
+        }
+    }
+
+    .file-actions {
+        display: none;
+    }
+
+    &:hover {
+        .file-status {
+            display: none;
+        }
+        .file-actions {
+            display: inline-block;
+        }
+    }
+}

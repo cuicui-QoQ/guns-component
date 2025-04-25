@@ -3,6 +3,13 @@
 @import './core/bem';
 @import './core/mixins';
 
+ul,
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 // layout
 @import './theme/reboot';
 
@@ -26,3 +33,6 @@
 
 // progress
 @import '../components/Progress/style';
+
+// Upload
+@import '../components/Upload/style';

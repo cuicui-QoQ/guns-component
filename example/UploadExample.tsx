@@ -1,10 +1,49 @@
 import axios from 'axios'
 import React from 'react'
 
-import Upload from '../src/components/Upload/upload'
+import Upload, { UploadFile } from '../src/components/Upload/upload'
+import UploadList from '../src/components/Upload/uploadList'
 
 const actionUrl = 'https://jsonplaceholder.typicode.com/posts'
+
+const defaultFileList: UploadFile[] = [
+    {
+        uid: '1',
+        size: 1234,
+        name: 'xxx.png',
+        status: 'uploading',
+        percent: 30,
+    },
+    {
+        uid: '2',
+        size: 1234,
+        name: 'yyy.png',
+        status: 'success',
+    },
+    {
+        uid: '3',
+        size: 1234,
+        name: 'yyy.png',
+        status: 'error',
+    },
+]
 function UploadExample() {
+    const handleOnProgress = () => {
+        console.log('触发了onProgress')
+    }
+
+    const handleOnChange = () => {
+        console.log('触发了onChange')
+    }
+
+    const handleOnSuccess = () => {
+        console.log('触发了onSuccess')
+    }
+
+    const handleOnError = () => {
+        console.log('触发了onError')
+    }
+
     return (
         <div>
             <form
@@ -36,32 +75,20 @@ function UploadExample() {
             <h1>下面这是自定义的更新组件-beforeUpload返回Promise</h1>
             <Upload
                 action={actionUrl}
-                onProgress={() => {
-                    console.log('触发了onProgress')
-                }}
+                onProgress={handleOnProgress}
                 beforeUpload={(file: File) => {
                     const newFile = new File([file], 'new_file.docx', {})
                     return Promise.resolve(newFile)
                 }}
-                onSuccess={() => {
-                    console.log('触发了onSuccess')
-                }}
-                onError={() => {
-                    console.log('触发了onError')
-                }}
+                onSuccess={handleOnSuccess}
+                onError={handleOnError}
             ></Upload>
             <h1>下面这是自定义的更新组件-beforeUpload有校验</h1>
             <Upload
                 action={actionUrl}
-                onProgress={() => {
-                    console.log('触发了onProgress')
-                }}
-                onChange={() => {
-                    console.log('触发了onChange')
-                }}
-                onSuccess={() => {
-                    console.log('触发了onSuccess')
-                }}
+                onProgress={handleOnProgress}
+                onChange={handleOnChange}
+                onSuccess={handleOnSuccess}
                 beforeUpload={(file: File) => {
                     if (Math.floor(file.size / 1024) >= 50) {
                         alert('文件大小不能超过50kb')
@@ -69,9 +96,16 @@ function UploadExample() {
                     }
                     return true
                 }}
-                onError={() => {
-                    console.log('触发了onError')
-                }}
+                onError={handleOnError}
+            ></Upload>
+            <h1>下面这是自定义的更新组件-default</h1>
+            <Upload
+                action={actionUrl}
+                onProgress={handleOnProgress}
+                onChange={handleOnChange}
+                onSuccess={handleOnSuccess}
+                onError={handleOnError}
+                defaultFileList={defaultFileList}
             ></Upload>
         </div>
     )
