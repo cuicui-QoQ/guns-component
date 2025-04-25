@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import Button, { ButtonType } from '../Button/button'
-import UploadList from './uploadList'
+import UploadFileList from './uploadFileList'
 import cn from 'classnames'
 import axios from 'axios'
 
@@ -146,6 +146,13 @@ const Upload: React.FC<UploadProps> = props => {
         }
     }
 
+    const handleRemove = (file: UploadFile) => {
+        setFileList((prevFileList: UploadFile[]) => {
+            return prevFileList.filter(f => f.uid !== file.uid)
+        })
+        onRemove?.(file)
+    }
+
     return (
         <div className={classes}>
             <Button
@@ -162,7 +169,10 @@ const Upload: React.FC<UploadProps> = props => {
                 type="file"
                 onChange={handleFileChange}
             />
-            <UploadList fileList={fileList} onRemove={onRemove}></UploadList>
+            <UploadFileList
+                fileList={fileList}
+                onRemove={handleRemove}
+            ></UploadFileList>
         </div>
     )
 }

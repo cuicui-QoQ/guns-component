@@ -37,7 +37,7 @@ const Progress: React.FC<ProgressProps> = ({
             <div className="guns-progress__bar-outer">
                 <div className={innerClass} style={{ width: `${percent}%` }}>
                     {showText && (
-                        <div className="innner-text">{`${percent}`}</div>
+                        <div className="innner-text">{`${percent}%`}</div>
                     )}
                 </div>
             </div>

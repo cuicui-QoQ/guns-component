@@ -2,7 +2,6 @@ import axios from 'axios'
 import React from 'react'
 
 import Upload, { UploadFile } from '../src/components/Upload/upload'
-import UploadList from '../src/components/Upload/uploadList'
 
 const actionUrl = 'https://jsonplaceholder.typicode.com/posts'
 
@@ -72,7 +71,7 @@ function UploadExample() {
                     }
                 }}
             />
-            <h1>下面这是自定义的更新组件-beforeUpload返回Promise</h1>
+            <h5>下面这是自定义的更新组件-beforeUpload返回Promise</h5>
             <Upload
                 action={actionUrl}
                 onProgress={handleOnProgress}
@@ -83,7 +82,7 @@ function UploadExample() {
                 onSuccess={handleOnSuccess}
                 onError={handleOnError}
             ></Upload>
-            <h1>下面这是自定义的更新组件-beforeUpload有校验</h1>
+            <h5>下面这是自定义的更新组件-beforeUpload有校验</h5>
             <Upload
                 action={actionUrl}
                 onProgress={handleOnProgress}
@@ -98,7 +97,7 @@ function UploadExample() {
                 }}
                 onError={handleOnError}
             ></Upload>
-            <h1>下面这是自定义的更新组件-default</h1>
+            <h5>下面这是自定义的更新组件-default</h5>
             <Upload
                 action={actionUrl}
                 onProgress={handleOnProgress}
