@@ -71,7 +71,8 @@ function UploadExample() {
                     }
                 }}
             />
-            <h5>下面这是自定义的更新组件-beforeUpload返回Promise</h5>
+            <h4>下面这是自定义的更新组件</h4>
+            <h5>beforeUpload返回Promise</h5>
             <Upload
                 action={actionUrl}
                 onProgress={handleOnProgress}
@@ -81,15 +82,22 @@ function UploadExample() {
                 }}
                 onSuccess={handleOnSuccess}
                 onError={handleOnError}
+            ></Upload>
+            <h5>网络请求中带上额外参数</h5>
+            <Upload
+                action={actionUrl}
+                onProgress={handleOnProgress}
+                onSuccess={handleOnSuccess}
+                onError={handleOnError}
                 name="testFileName"
                 data={{ key: 'value' }}
                 headers={{
                     'X-Powered-By': 'Guns',
                 }}
             ></Upload>
-            <h5>下面这是自定义的更新组件-只允许上传一个或者多个html文件</h5>
+            <h5>只允许上传一个或者多个html文件</h5>
             <Upload action={actionUrl} accept=".html" multiple={true}></Upload>
-            <h5>下面这是自定义的更新组件-beforeUpload有校验</h5>
+            <h5>beforeUpload有校验</h5>
             <Upload
                 action={actionUrl}
                 onProgress={handleOnProgress}
@@ -104,7 +112,16 @@ function UploadExample() {
                 }}
                 onError={handleOnError}
             ></Upload>
-            <h5>下面这是自定义的更新组件-default</h5>
+            <h5>defaultFileList 看样式</h5>
+            <Upload
+                action={actionUrl}
+                onProgress={handleOnProgress}
+                onChange={handleOnChange}
+                onSuccess={handleOnSuccess}
+                onError={handleOnError}
+                defaultFileList={defaultFileList}
+            ></Upload>
+            <h5>defaultFileList 看样式</h5>
             <Upload
                 action={actionUrl}
                 onProgress={handleOnProgress}

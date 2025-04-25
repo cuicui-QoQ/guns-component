@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { Children, useRef } from 'react'
 import Button, { ButtonType } from '../Button/button'
 import UploadFileList from './uploadFileList'
 import cn from 'classnames'
@@ -19,6 +19,8 @@ export interface UploadProps {
     withCredentials?: boolean
     accept?: string
     multiple?: boolean
+    children?: React.ReactNode
+    drag?: boolean
 }
 
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
@@ -34,8 +36,19 @@ export interface UploadFile {
     error?: any
 }
 
-const Upload: React.FC<UploadProps> = props => {
+const defaultChildren = (
+    <Button btnType={ButtonType.Primary} style={{ width: '200px' }}>
+        Upload file
+    </Button>
+)
+
+const Upload: React.FC<UploadProps> = ({
+    children = defaultChildren,
+
+    ...restprops
+}) => {
     const {
+        drag,
         action,
         onProgress,
         onSuccess,
@@ -50,7 +63,7 @@ const Upload: React.FC<UploadProps> = props => {
         withCredentials,
         accept,
         multiple,
-    } = props
+    } = restprops
     const [fileList, setFileList] = React.useState<UploadFile[]>(
         defaultFileList || [],
     )
@@ -175,14 +188,8 @@ const Upload: React.FC<UploadProps> = props => {
     }
 
     return (
-        <div className={classes}>
-            <Button
-                btnType={ButtonType.Primary}
-                onClick={handleClick}
-                style={{ width: '200px' }}
-            >
-                Upload file
-            </Button>
+        <div className={classes} onClick={handleClick}>
+            {children}
             <input
                 accept={accept}
                 multiple={multiple}
