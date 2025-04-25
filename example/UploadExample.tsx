@@ -130,6 +130,26 @@ function UploadExample() {
                 onError={handleOnError}
                 defaultFileList={defaultFileList}
             ></Upload>
+            <h5>支持拖动文件</h5>
+            <Upload
+                action={actionUrl}
+                onProgress={handleOnProgress}
+                onChange={handleOnChange}
+                onSuccess={handleOnSuccess}
+                onError={handleOnError}
+                drag
+            >
+                {
+                    <div
+                        style={{
+                            height: '100px',
+                            backgroundColor: '#ccc',
+                        }}
+                    >
+                        拖动文件到这里上传
+                    </div>
+                }
+            </Upload>
         </div>
     )
 }

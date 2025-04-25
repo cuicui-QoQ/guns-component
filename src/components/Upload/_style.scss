@@ -2,6 +2,15 @@
     padding: 0;
 }
 
+@include b(upload) {
+    display: inline-block;
+
+    @include e(dragger) {
+        @include when(dragover) {
+            opacity: 0.4;
+        }
+    }
+}
 @include b(upload-file-list-item) {
     padding: 0;
     .file-name-block {

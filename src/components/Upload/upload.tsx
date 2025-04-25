@@ -3,6 +3,7 @@ import Button, { ButtonType } from '../Button/button'
 import UploadFileList from './uploadFileList'
 import cn from 'classnames'
 import axios from 'axios'
+import Dragger from './dragger'
 
 export interface UploadProps {
     action: string
@@ -189,7 +190,11 @@ const Upload: React.FC<UploadProps> = ({
 
     return (
         <div className={classes} onClick={handleClick}>
-            {children}
+            {drag ? (
+                <Dragger onFile={uploadFiles}> {children}</Dragger>
+            ) : (
+                children
+            )}
             <input
                 accept={accept}
                 multiple={multiple}
