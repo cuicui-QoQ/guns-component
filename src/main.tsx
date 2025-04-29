@@ -6,10 +6,19 @@ import './styles/index.scss'
 // import IconExample from '../example/IconExample.tsx'
 // import AlertExample from '../example/AlertExample.tsx'
 // import MenuExample from '../example/MenuExample.tsx'
-import InputExample from '../example/InputExample.tsx'
+// import InputExample from '../example/InputExample.tsx'
+
+// import AutoCompleteExample from '../example/AutoCompleteExample.tsx'
+
+// import UploadExample from '../example/UploadExample.tsx'
+// import ProgressExample from '../example/ProgressExample.tsx'
+
+import FormExample from '../example/FormExample.tsx'
+
+// import TreeSelectExample from '../example/TreeSelectExample.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <InputExample />
+        <FormExample />
     </StrictMode>,
 )
