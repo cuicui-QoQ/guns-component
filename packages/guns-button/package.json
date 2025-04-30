@@ -1,0 +1,25 @@
+{
+    "name": "@cui-guns/button",
+    "version": "0.0.1",
+    "publishConfig": {
+        "access": "public"
+    },
+    "description": "> 组件库的button组件",
+    "author": "cuicui <wyg.scut@qq.com>",
+    "homepage": "https://github.com/cuicui-QoQ/guns-component#readme",
+    "license": "ISC",
+    "files": [
+        "_style.scss",
+        "button.tsx"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cuicui-QoQ/guns-component.git"
+    },
+    "dependencies": {
+        "@cui-guns/core-scss": "^0.0.1"
+    },
+    "bugs": {
+        "url": "https://github.com/cuicui-QoQ/guns-component/issues"
+    }
+}
