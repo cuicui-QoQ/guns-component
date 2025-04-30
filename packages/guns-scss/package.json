@@ -1,27 +1,27 @@
 {
-    "name": "@guns/core-scss",
-    "private": false,
-    "version": "0.0.2",
-    "description": "> TODO: description",
-    "author": "cuicui <wyg.scut@qq.com>",
-    "homepage": "https://github.com/cuicui-QoQ/guns-component#readme",
-    "license": "ISC",
-    "main": "lib/guns-sass.js",
-    "directories": {
-        "lib": "lib",
-        "test": "__tests__"
-    },
-    "files": [
-        "lib"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/cuicui-QoQ/guns-component.git"
-    },
-    "scripts": {
-        "test": "node ./__tests__/guns-sass.test.js"
-    },
-    "bugs": {
-        "url": "https://github.com/cuicui-QoQ/guns-component/issues"
-    }
+  "name": "@guns/core-scss",
+  "private": false,
+  "version": "0.0.2",
+  "description": "> TODO: description",
+  "author": "cuicui <wyg.scut@qq.com>",
+  "homepage": "https://github.com/cuicui-QoQ/guns-component#readme",
+  "license": "ISC",
+  "main": "lib/guns-sass.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuicui-QoQ/guns-component.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/guns-sass.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/cuicui-QoQ/guns-component/issues"
+  }
 }
