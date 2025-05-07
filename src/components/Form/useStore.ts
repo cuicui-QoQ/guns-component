@@ -18,6 +18,7 @@ export interface FormState {
 
 export enum FormActionType {
     addField = 'addField',
+    updateField = 'updateField',
 }
 
 export interface FieldsAction {
@@ -37,6 +38,14 @@ function fieldsReducer(state: FieldsState, action: FieldsAction): FieldsState {
                     rules: [],
                     isValid: true,
                     errors: [],
+                },
+            }
+        case 'updateField':
+            return {
+                ...state,
+                [action.name]: {
+                    ...state[action.name],
+                    value: action.value,
                 },
             }
         default:
