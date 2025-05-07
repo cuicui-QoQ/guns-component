@@ -16,15 +16,19 @@ export interface FormState {
     isValid: boolean
 }
 
+export enum FormActionType {
+    addField = 'addField',
+}
+
 export interface FieldsAction {
-    type: 'addFiled'
+    type: FormActionType
     name: string
     value: any
 }
 // react hooks
 function fieldsReducer(state: FieldsState, action: FieldsAction): FieldsState {
     switch (action.type) {
-        case 'addFiled':
+        case 'addField':
             return {
                 ...state,
                 [action.name]: {
@@ -43,7 +47,7 @@ function fieldsReducer(state: FieldsState, action: FieldsAction): FieldsState {
 function useStore() {
     const [form, setForm] = useState<FormState>({ isValid: true })
     const [fields, dispatch] = useReducer(fieldsReducer, {})
-    return [fields, dispatch, form, setForm]
+    return { fields, dispatch, form, setForm }
 }
 
 export default useStore
