@@ -6,6 +6,10 @@
         padding-left: 4px;
     }
 
+    @include e(row) {
+        display: inline-block;
+    }
+
     @include e(children) {
         display: inline-block;
     }

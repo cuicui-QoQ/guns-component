@@ -7,18 +7,21 @@ export interface FormProps {
     styles?: React.CSSProperties
     children: React.ReactNode
     name?: string
+    initialValues?: Record<string, any>
 }
 
 export type IFormContext = Pick<
     ReturnType<typeof useStore>,
     'dispatch' | 'fields'
->
+> &
+    Pick<FormProps, 'initialValues'>
 
 export const FormContext = React.createContext<IFormContext>({} as IFormContext)
 const Form: React.FC<FormProps> = ({
     className,
     styles,
     children,
+    initialValues,
     name = 'guns-form',
 }) => {
     const formClassName = cn('guns-form', className)
@@ -26,6 +29,7 @@ const Form: React.FC<FormProps> = ({
     const passedContext: IFormContext = {
         dispatch: dispatch,
         fields,
+        initialValues,
     }
     return (
         <>

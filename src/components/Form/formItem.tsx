@@ -27,7 +27,7 @@ const FormItem: React.FC<FormItemProps> = ({
     ...restProps
 }) => {
     const { label, name } = restProps
-    const { dispatch, fields } = useContext(FormContext)
+    const { dispatch, fields, initialValues } = useContext(FormContext)
     // 拿到对应控件的状态
     const fieldState = fields[name]
     const value = fieldState?.value
@@ -36,7 +36,7 @@ const FormItem: React.FC<FormItemProps> = ({
         dispatch({
             type: FormActionType.addField,
             name: name,
-            value: '',
+            value: initialValues?.[name] || '',
         })
     }, [])
     const rowClassName = cn('guns-form-item__row', className)
@@ -54,7 +54,15 @@ const FormItem: React.FC<FormItemProps> = ({
         },
     }
     const childList = React.Children.toArray(children)
-    // TODO: 这里需要对对于children进行检查，避免奇怪的类型混入
+    if (0 === childList.length) {
+        console.error('No child element found in Form.Item')
+    }
+    if (childList.length > 1) {
+        console.warn('Only support one child')
+    }
+    if (!React.isValidElement(childList[0])) {
+        console.error('不合法的React组件')
+    }
     const child = childList[0] as React.ReactElement
     const newChild = React.cloneElement(child, {
         ...child.props,
