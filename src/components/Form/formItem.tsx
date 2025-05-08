@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import cn from 'classnames'
 import { FormContext } from './form.tsx'
 import { FormActionType } from './useStore.ts'
-
+import { RuleItem } from 'async-validator'
 export interface FormItemProps {
     className?: string
     styles?: React.CSSProperties
@@ -15,6 +15,8 @@ export interface FormItemProps {
     trigger?: string
     // 用e中取出哪个值
     getValueFromEvent?: (event: any) => any
+    validateTrigger?: string
+    rules?: RuleItem[]
 }
 
 const FormItem: React.FC<FormItemProps> = ({
@@ -23,11 +25,14 @@ const FormItem: React.FC<FormItemProps> = ({
     children,
     valuePropName = 'value',
     trigger = 'onChange',
+    validateTrigger = 'onBlur',
+    rules = [],
     getValueFromEvent = e => e.target.value,
     ...restProps
 }) => {
     const { label, name } = restProps
-    const { dispatch, fields, initialValues } = useContext(FormContext)
+    const { dispatch, fields, initialValues, validateField } =
+        useContext(FormContext)
     // 拿到对应控件的状态
     const fieldState = fields[name]
     const value = fieldState?.value
@@ -37,6 +42,7 @@ const FormItem: React.FC<FormItemProps> = ({
             type: FormActionType.addField,
             name: name,
             value: initialValues?.[name] || '',
+            rules,
         })
     }, [])
     const rowClassName = cn('guns-form-item__row', className)
@@ -50,8 +56,15 @@ const FormItem: React.FC<FormItemProps> = ({
                 type: FormActionType.updateField,
                 name: name,
                 value: newV,
+                rules,
             })
         },
+    }
+    if (rules.length > 0) {
+        controlProps[validateTrigger] = async () => {
+            console.log('validateTrigger', validateTrigger)
+            await validateField(name)
+        }
     }
     const childList = React.Children.toArray(children)
     if (0 === childList.length) {

@@ -11,7 +11,11 @@ function FormExample() {
                 agreement: true,
             }}
         >
-            <FormItem label="用户名" name="username">
+            <FormItem
+                label="用户名"
+                name="username"
+                rules={[{ type: 'email', required: true }]}
+            >
                 <Input placeholder="请输入用户名"></Input>
             </FormItem>
             <FormItem label="密码" name="password">
