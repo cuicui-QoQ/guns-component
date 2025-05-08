@@ -36,7 +36,6 @@ const FormItem: React.FC<FormItemProps> = ({
     // 拿到对应控件的状态
     const fieldState = fields[name]
     const value = fieldState?.value
-    console.log('传递给input的 value', value)
     useEffect(() => {
         dispatch({
             type: FormActionType.addField,
@@ -81,15 +80,25 @@ const FormItem: React.FC<FormItemProps> = ({
         ...child.props,
         ...controlProps,
     })
-    console.log('controlProps', controlProps)
+    const errors = fieldState?.errors
+    const isRequired = rules.some(rule => rule.required)
+    const hasErrors = errors && errors.length > 0
     return (
         <div className={rowClassName} style={styles}>
+            {isRequired && <>*</>}
             {label && (
                 <div className={labelClassName}>
                     <label title={label}>{label}</label>
                 </div>
             )}
-            <div className={childrenClassName}>{newChild}</div>
+            <div className={childrenClassName}>
+                {newChild}
+                {hasErrors && (
+                    <div>
+                        <span>{errors[0].message}</span>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
