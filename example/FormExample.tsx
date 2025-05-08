@@ -11,6 +11,14 @@ function FormExample() {
             <FormItem label="密码" name="password">
                 <Input placeholder="请输入密码"></Input>
             </FormItem>
+            <FormItem
+                label="同意"
+                name="agreement"
+                getValueFromEvent={e => e.target.checked}
+            >
+                <input type="checkbox" placeholder="请输入密码"></input>
+                请勾选用户输入同意
+            </FormItem>
         </Form>
     )
 }

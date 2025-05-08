@@ -9,12 +9,21 @@ export interface FormItemProps {
     children: React.ReactNode
     label?: string
     name: string
+    // 用哪个value去控制子组件中的value
+    valuePropName?: string
+    // 触发值
+    trigger?: string
+    // 用e中取出哪个值
+    getValueFromEvent?: (event: any) => any
 }
 
 const FormItem: React.FC<FormItemProps> = ({
     className,
     styles,
     children,
+    valuePropName = 'value',
+    trigger = 'onChange',
+    getValueFromEvent = e => e.target.value,
     ...restProps
 }) => {
     const { label, name } = restProps
@@ -33,11 +42,10 @@ const FormItem: React.FC<FormItemProps> = ({
     const rowClassName = cn('guns-form-item__row', className)
     const labelClassName = cn('guns-form-item__label')
     const childrenClassName = cn('guns-form-item__children')
-    // todo： 这里需要适配不同的事件和change函数
     const controlProps = {
-        value: value,
-        onChange: (e: any) => {
-            const newV = e.target.value
+        [valuePropName]: value,
+        [trigger]: (e: any) => {
+            const newV = getValueFromEvent(e)
             dispatch({
                 type: FormActionType.updateField,
                 name: name,
