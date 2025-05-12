@@ -1,8 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
 
-import './_style.scss'
-
 export enum ButtonSize {
     Large = 'lg',
     Small = 'sm',

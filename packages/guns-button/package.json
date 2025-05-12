@@ -1,13 +1,13 @@
 {
     "name": "@cui-guns/button",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publishConfig": {
         "access": "public"
     },
     "scripts": {
         "clean": "rimraf ./build",
-        "build": "npm run clean && npm run build-ts && npm run build-css",
-        "build-ts": "tsc -p tsconfig.build.json",
+        "build": "npm run clean && npm run build-css && npm run build-ts",
+        "build-ts": "tsc -p tsconfig.build.json --moduleResolution node",
         "build-css": "node-sass ./src/_style.scss ./build/style.css"
     },
     "description": "> 组件库的button组件",
