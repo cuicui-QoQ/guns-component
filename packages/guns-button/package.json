@@ -1,6 +1,6 @@
 {
     "name": "@cui-guns/button",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "publishConfig": {
         "access": "public"
     },
@@ -15,19 +15,18 @@
     "homepage": "https://github.com/cuicui-QoQ/guns-component#readme",
     "license": "ISC",
     "files": [
-        "_style.scss",
-        "button.tsx",
-        "index.tsx"
+        "build"
     ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/cuicui-QoQ/guns-component.git"
     },
-    "dependencies": {
-        "@cui-guns/core-scss": "^0.0.1"
-    },
     "devDependencies": {},
     "bugs": {
         "url": "https://github.com/cuicui-QoQ/guns-component/issues"
+    },
+    "peerDependencies": {
+        "react": ">=16.8.0",
+        "classnames": ">=2.2.6"
     }
 }
