@@ -1,6 +1,6 @@
 @use 'sass:color';
 
-@import '../guns-scss/index.scss';
+@import '../../guns-scss/index.scss';
 
 @mixin button-size($padding-x, $padding-y, $font-size, $boarder-radius) {
     padding: $padding-x $padding-y;
@@ -12,8 +12,10 @@
     $background,
     $border,
     $color,
-    $hover-background: color.adjust($background, $lightness: 15%),
-    $hover-border: color.adjust($border, $lightness: 15%),
+    // $hover-background: color.adjust($background, $lightness: 15%),
+    $hover-background: lighten($background, 15%),
+    // $hover-border: color.adjust($border, $lightness: 15%),
+    $hover-border: lighten($border, 15%),
     $hover-color: $color
 ) {
     background: $background;

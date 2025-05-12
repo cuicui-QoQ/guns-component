@@ -16,10 +16,12 @@ export enum ButtonType {
     Link = 'link',
 }
 
-interface BaseButtonProps {
+export interface BaseButtonProps {
+    /** Button contents 11 */
     className?: string
+    /** Button contents 22 */
     disabled?: boolean
-    size?: ButtonSize
+    size?: 'lg' | 'sm' | 'std'
     btnType?: ButtonType
     children: React.ReactNode
     href?: string
@@ -29,9 +31,10 @@ type WebButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
 type AnchorButtonProps = BaseButtonProps &
     React.AnchorHTMLAttributes<HTMLElement>
 export type ButtonProps = Partial<WebButtonProps & AnchorButtonProps>
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
     btnType = ButtonType.Default,
     disabled = false,
+    /** Button contents 33 */
     size,
     children,
     href,

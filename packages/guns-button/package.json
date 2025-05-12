@@ -4,13 +4,19 @@
     "publishConfig": {
         "access": "public"
     },
+    "scripts": {
+        "build": "npm run build-ts && npm run build-css",
+        "build-ts": "tsc -p tsconfig.build.json",
+        "build-css": "node-sass ./src/_style.scss ./build/style.css"
+    },
     "description": "> 组件库的button组件",
     "author": "cuicui <wyg.scut@qq.com>",
     "homepage": "https://github.com/cuicui-QoQ/guns-component#readme",
     "license": "ISC",
     "files": [
         "_style.scss",
-        "button.tsx"
+        "button.tsx",
+        "index.tsx"
     ],
     "repository": {
         "type": "git",
@@ -19,6 +25,7 @@
     "dependencies": {
         "@cui-guns/core-scss": "^0.0.1"
     },
+    "devDependencies": {},
     "bugs": {
         "url": "https://github.com/cuicui-QoQ/guns-component/issues"
     }
