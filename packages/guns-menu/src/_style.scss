@@ -1,0 +1,131 @@
+@include b(menu) {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 30px;
+    list-style: none;
+
+    @include m(horizontal) {
+        flex-direction: row;
+
+        @include b(menu-item) {
+            border-bottom: $menu-border-width solid $menu-border-color;
+            @include when(active) {
+                color: $menu-item-active-color;
+                border-bottom: $menu-border-width solid $menu-item-active-color;
+            }
+
+            &:hover {
+                color: $menu-item-active-color;
+                border-bottom: $menu-border-width solid $menu-item-active-color;
+            }
+        }
+    }
+
+    @include m(vertical) {
+        flex-direction: column;
+        display: inline-block;
+
+        @include b(menu-item) {
+            border-left: $menu-border-width solid $menu-border-color;
+            margin-left: 5px;
+            @include when(active) {
+                border-left: $menu-border-width solid $menu-item-active-color;
+            }
+            &:hover {
+                border-left: $menu-border-width solid $menu-item-active-color;
+            }
+        }
+    }
+}
+
+@include b(menu-item) {
+    padding: $menu-item-padding-x $menu-item-padding-y;
+    cursor: pointer;
+    transition: $menu-transition;
+
+    @include when(disabled) {
+        color: $menu-item-disabled-color;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+    @include when(active) {
+        color: $menu-item-active-color;
+    }
+    &:hover {
+        color: $menu-item-active-color;
+    }
+}
+
+@include b(sub-menu) {
+    padding: $menu-item-padding-x $menu-item-padding-y 0;
+
+    &:hover {
+        @include e(title) {
+            // 子菜单标题
+            color: $menu-item-active-color;
+        }
+    }
+    @include when(active) {
+        @include e(title) {
+            // 子菜单标题
+            color: $menu-item-active-color;
+        }
+    }
+
+    @include e(children) {
+        // 子菜单内容区
+        display: none;
+
+        @include when(open) {
+            display: block;
+        }
+    }
+
+    @include m(horizontal) {
+        position: relative;
+        border-bottom: $menu-border-width solid $menu-border-color;
+        @include when(active) {
+            border-bottom: $menu-border-width solid $menu-item-active-color;
+        }
+        &:hover {
+            border-bottom: $menu-border-width solid $menu-item-active-color;
+        }
+        @include e(children) {
+            position: absolute;
+            top: 56px;
+            background-color: #fff;
+            .guns-menu-item {
+                border-bottom-width: 0;
+                @include when(active) {
+                    bborder-bottom-width: 0;
+                }
+                &:hover {
+                    border-bottom-width: 0;
+                }
+            }
+        }
+    }
+
+    @include m(vertical) {
+        border-left: $menu-border-width solid $menu-border-color;
+        margin-left: 5px;
+        &:hover {
+            border-left-color: $menu-item-active-color;
+        }
+        @include when(active) {
+            border-left-color: $menu-item-active-color;
+        }
+
+        .guns-menu-item {
+            border-left-width: 0;
+            @include when(active) {
+                border-left-width: 0;
+            }
+            &:hover {
+                border-left-width: 0;
+            }
+        }
+    }
+}

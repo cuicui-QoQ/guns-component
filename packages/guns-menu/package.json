@@ -1,0 +1,28 @@
+{
+    "name": "@cui-guns/menu",
+    "version": "0.0.1",
+    "publishConfig": {
+        "access": "public"
+    },
+    "description": "> 组件库的menu组件",
+    "author": "cuicui <wyg.scut@qq.com>",
+    "homepage": "https://github.com/cuicui-QoQ/guns-component#readme",
+    "license": "ISC",
+    "files": [
+        "_style.scss",
+        "menu.tsx",
+        "menuItem.tsx",
+        "subMenu.tsx"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cuicui-QoQ/guns-component.git"
+    },
+    "dependencies": {
+        "@cui-guns/core-scss": "^0.0.1"
+    },
+    "devDependencies": {},
+    "bugs": {
+        "url": "https://github.com/cuicui-QoQ/guns-component/issues"
+    }
+}
