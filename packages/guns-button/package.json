@@ -5,7 +5,8 @@
         "access": "public"
     },
     "scripts": {
-        "build": "npm run build-ts && npm run build-css",
+        "clean": "rimraf ./build",
+        "build": "npm run clean && npm run build-ts && npm run build-css",
         "build-ts": "tsc -p tsconfig.build.json",
         "build-css": "node-sass ./src/_style.scss ./build/style.css"
     },
